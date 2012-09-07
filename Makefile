@@ -12,6 +12,11 @@ compile: deps
 clean:
 	@./rebar clean
 
+test: examples/tic_tac_toe results
+
+examples/%:
+	./basho_bench examples/$*.config
+
 distclean: clean
 	@rm -rf basho_bench deps
 
