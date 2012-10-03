@@ -18,7 +18,7 @@ new(ID) ->
     MyNode = basho_bench_config:get(tic_tac_toe_mynode),
     GLNode = basho_bench_config:get(tic_tac_toe_glnode),
 
-    case net_kernel:start([MyNode, shortnames]) of
+    case net_kernel:start([MyNode]) of
         {ok, _} ->
             ?INFO("Net kernel started as ~p~n", [node()]);
         {error, {already_started, _}} ->
@@ -37,7 +37,7 @@ new(ID) ->
     ?INFO("Try to ping ~p~n", [GLNode]),
     case net_kernel:connect(GLNode) of
         true  -> ok;
-        false -> ?FAIL_MSG("Failed to connect connect ~p, aborting!~n", [?MODULE, GLNode])
+        false -> ?FAIL_MSG("Failed to connect connect ~p, aborting!~n", [GLNode])
     end,
 
     GameID = gameid(),
